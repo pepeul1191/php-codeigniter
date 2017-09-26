@@ -70,6 +70,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | The $query_builder variables lets you determine whether or not to load
 | the query builder class.
 */
+
+require_once 'vendor/j4mie/idiorm/idiorm.php';
+require_once 'vendor/j4mie/paris/paris.php';
+
+ORM::configure('sqlite:/home/pepe/Documentos/php/codeigniter/application/db/db_quinua.db');
+ORM::configure('return_result_sets', true);
+ORM::configure('error_mode', PDO::ERRMODE_WARNING);
+
+/*
 $active_group = 'default';
 $query_builder = TRUE;
 
@@ -94,3 +103,4 @@ $db['default'] = array(
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+*/
