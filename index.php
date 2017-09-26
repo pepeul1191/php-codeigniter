@@ -2,6 +2,9 @@
 
 require "vendor/autoload.php";
 
+header('x-powered-by: PHP');
+header('Server: Ubuntu');
+
 /**
  * CodeIgniter
  *
