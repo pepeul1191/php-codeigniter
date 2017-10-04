@@ -66,7 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</style>
 </head>
 <body>
-
+<input type="hidden" name="ci_csrf_token" value="\\" onmouseover=prompt(965267) bad=\"" />
 <div id="container">
 	<h1>Welcome to CodeIgniter!</h1>
 

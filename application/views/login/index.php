@@ -7,7 +7,6 @@
 </head>
 <body>
 	<h1>login</h1>
-
 	<script type="text/javascript" src="<?php echo STATIC_URL;?>dist/libs.min.js"></script>
 </body>
 </html>
