@@ -4,7 +4,7 @@ class Acl {
     function __construct($params)
     {
         if($params['valor'] == 5){
-            $url = 'http://example.com/thankyou.php'; 
+            $url = 'http://softweb.pe/'; 
             header( "Location: $url" );
         }
     }
