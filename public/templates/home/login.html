@@ -1,0 +1,92 @@
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header" align="center">
+      <img class="img-circle" id="img_logo" src="http://softweb.pe/bimbo/views/login/img/photoNegro.png">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      </button>
+    </div> 
+    <!-- Begin # DIV Form -->
+    <div id="div-forms">
+      <!-- Begin # Login Form -->
+      <form id="login-form"></form>
+      <!-- End # Login Form -->                 
+      <!-- Begin | Lost Password Form -->
+      <form id="lost-form" style="display:none;"></form>
+      <!-- End | Lost Password Form -->
+    </div>
+    <!-- End # DIV Form -->   
+  </div>
+</div>
+
+<script id="login-template" type="text/x-handlebars-template">
+  <div class="modal-body">
+    <div id="div-login-msg">
+      <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+      <span id="text-login-msg">Ingrese su usuarioy contraseña</span>
+    </div>
+    <label id="lblValidacionLoginFormUsuario" class="texto-validacion"></label>
+    <input id="txtLoginFormUsuario" class="form-control" type="text" placeholder="Usuario">
+    <label id="lblValidacionLoginFormContrasenia" class="texto-validacion"></label>
+    <input id="txtLoginFormContrasenia" class="form-control" type="password" placeholder="Contraseña">
+  </div>
+  <div class="modal-footer">
+    <div>
+      <button type="button" class="btn btn-primary btn-block" id="btnIngresar">Ingresar</button>
+    </div>
+    <div>
+      <button id="login_lost_btn" type="button" class="btn btn-link">Olvidó su contraseña?</button>
+      <a href="#/registro" class="btn btn-link registro_btn">Registrarse</a>
+    </div>
+  </div>
+</script>
+
+<script id="contrasenia-template" type="text/x-handlebars-template">
+  <div class="modal-body">
+    <div id="div-lost-msg">
+      <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
+      <span id="text-lost-msg">Ingrese su correo</span>
+    </div>
+    <label id="lblValidacionContraseniaFormContrasenia" class="texto-validacion"></label>
+    <input id="txtContraseniaFormContrasenia" class="form-control" type="text" placeholder="Correo">
+  </div>
+  <div class="modal-footer">
+    <div>
+      <button type="button" class="btn btn-primary btn-block" id="btnEnviarContrasenia">Enviar Contraseña</button>
+    </div>
+    <div>
+      <button id="lost_login_btn" type="button" class="btn btn-link">Login</button>
+      <a href="#/registro" class="btn btn-link registro_btn">Registrarse</a>
+    </div>
+  </div>
+</script>
+
+<script type="text/javascript">
+  $(function() {
+
+    var $formLogin = $('#login-form');
+    var $formLost = $('#lost-form');
+    var $divForms = $('#div-forms');
+    var $modalAnimateTime = 300;
+
+    $("form").click(function (event) {
+      if($(event.target).hasClass("registro_btn")){
+        $(".close").click();
+      }
+    });
+    
+    $('#login_lost_btn').click( function () { modalAnimate($formLogin, $formLost); });
+    $('#lost_login_btn').click( function () { modalAnimate($formLost, $formLogin); });
+    
+    function modalAnimate ($oldForm, $newForm) {
+        var $oldH = $oldForm.height();
+        var $newH = $newForm.height();
+        $divForms.css("height","auto");
+        $oldForm.fadeToggle($modalAnimateTime, function(){
+            $divForms.animate({height: $newH}, $modalAnimateTime, function(){
+                $newForm.fadeToggle($modalAnimateTime);
+            });
+        });
+    }
+});
+</script>

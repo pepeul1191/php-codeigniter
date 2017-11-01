@@ -1,0 +1,56 @@
+<div class="container">
+	<div class="col-md-4">
+		<h3>Ventajas de estar registrado</h3>
+		<ul>
+			<li>Es totalmente gratuito y tardarás menos de 2 minutos.</li>
+			<li>Podrás inscribir tu/s perro/s en la comunidad</li>
+			<li>Podrás participar en el foro, publicar fotos, conocer a más amigos y también, aprender cosas nuevas</li>
+			<li>Podrás votar y dejar tus comentarios en los artículos, fotos de los usuarios y otras muchas secciones</li>
+		</ul>
+		<h3>0.- Terminos y Condiciones</h3>
+		<p>He leído y estoy informado sobre la Ley N° 29733 - Ley de Protección de Datos Personales y su reglamento aprobado mediante Decreto Supremo N° 003-2013-JUS y la <a href="#">declaración de privacidad</a> del siguiente sitio. </br>
+		<input type="checkbox" value="">Acepto Terminos y Condiciones.</p>
+	</div>
+	<div class="col-md-4" id="div-registro"></div>
+	<div class="col-md-4" id="div-xd">
+		<h3>2.- Información Personal</h3>
+		<div class="form-group">
+		   <label class="control-label" for="">Nombre Completo</label><span class="texto-validacion"></span>
+		   <input type="text" class="form-control" id="" placeholder="">
+		</div>
+		<div class="form-group">
+		   <label class="control-label" for="">Teléfono de contacto</label><span class="texto-validacion"></span>
+		   <input type="text" class="form-control" id="" placeholder="">
+		</div>
+		<div class="form-group">
+		   <label class="control-label" for="">Distrito de Residencia</label><span class="texto-validacion"></span>
+		   <input type="text" class="form-control" id="" placeholder="" placeholder="DISTRITO, PROVINCIA, DEPARTAMENTO">
+		</div>
+		<button type="submit" class="btn btn-primary" id="btnGuardarPaso2" style="width: 100%">Guardar Información Personal</button>
+	</div>
+</div>
+<hr>
+<script id="registro-template" type="text/x-handlebars-template">
+	<h3>1. - Información de usuario</h3>
+  	<div class="form-group">
+	   <label class="control-label" for="txtUsuario">Nombre de Usuario</label><span class="texto-validacion"></span>
+	   <input type="text" class="form-control" id="txtUsuario" placeholder="">
+	</div>
+	<div class="form-group">
+	   <label class="control-label" for="txtCorreo">Correo Electrónico</label><span class="texto-validacion"></span>
+	   <input type="text" class="form-control" id="txtCorreo" placeholder="">
+	</div>
+	<div class="form-group">
+	   <label class="control-label" for="txtCorreoRepetir">Repetir Correo Electrónico</label><span class="texto-validacion"></span>
+	   <input type="text" class="form-control" id="txtCorreoRepetir" placeholder="">
+	</div>
+	<div class="form-group">
+	   <label class="control-label" for="txtContrasenia">Contraseña</label><span class="texto-validacion"></span>
+	   <input type="password" class="form-control" id="txtContrasenia" placeholder="">
+	</div>
+	<div class="form-group">
+	   <label class="control-label" for="txtContraseniaRepetir">Repetir Contraseña</label><span class="texto-validacion"></span>
+	   <input type="password" class="form-control" id="txtContraseniaRepetir" placeholder="">
+	</div>
+	<button type="submit" class="btn btn-primary" id="btnGuardarPaso1" style="width: 100%">Guardar Información de Usuario</button>
+</script>

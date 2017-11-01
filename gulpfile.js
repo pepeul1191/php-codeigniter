@@ -7,7 +7,7 @@ var replace = require('gulp-replace');
 var plumber = require('gulp-plumber');
 var watch = require('gulp-watch');
 var livereload = require('gulp-livereload');
-var BASE_URL = 'http://localhost/codeigniter/public/';
+var BASE_URL = 'http://localhost/code/public/';
 var DESTINO = 'public/dist/';
 var MEDIA = 'public/'
 
@@ -171,5 +171,46 @@ gulp.task('libros', function(){
     ])
     .pipe(plumber())
     .pipe(concatCss('libros.min.css'))
+    .pipe(gulp.dest(DESTINO));
+  });
+
+gulp.task('accesos', function(){
+    gulp.start('fonts', 'layout-css', 'layout-js', 'swp-plugins');
+    gulp.src([
+        DESTINO + 'libs.min.js',  
+        DESTINO + 'swp.js',
+        MEDIA + 'layouts/app.js',  
+        MEDIA + 'models/accesos/usuario.js', 
+        MEDIA + 'views/accesos/_table_usuario.js', 
+        MEDIA + 'views/accesos/_table_sistema.js', 
+        MEDIA + 'views/accesos/_table_menu.js', 
+        MEDIA + 'views/accesos/_table_rol.js', 
+        MEDIA + 'views/accesos/_table_permiso.js', 
+        MEDIA + 'views/accesos/_table_usuario_sistema.js', 
+        MEDIA + 'views/accesos/_table_log.js', 
+        MEDIA + 'views/accesos/sistema.js',
+        MEDIA + 'views/accesos/menu.js', 
+        MEDIA + 'views/accesos/rol.js', 
+        MEDIA + 'views/accesos/permiso.js', 
+        MEDIA + 'views/accesos/usuario.js', 
+        MEDIA + 'views/accesos/log.js', 
+        MEDIA + 'views/accesos/usuario_sistema.js', 
+        MEDIA + 'views/accesos/usuario_detalle.js', 
+        MEDIA + 'views/accesos/usuario_rol_permiso.js', 
+        MEDIA + 'views/accesos/_form_usuario.js', 
+        MEDIA + 'routes/accesos.js'
+    ])
+    //.pipe(uglify())
+    .pipe(plumber())
+    .pipe(concatJs('accesos.min.js'))
+    .pipe(gulp.dest(DESTINO))//.pipe(gulp.dest(DESTINO + 'home'))
+    .pipe(livereload());
+
+    gulp.src([
+        DESTINO + 'styles.min.css', 
+        DESTINO + 'swp.css'
+    ])
+    .pipe(plumber())
+    .pipe(concatCss('accesos.min.css'))
     .pipe(gulp.dest(DESTINO));
   });

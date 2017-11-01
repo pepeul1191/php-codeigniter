@@ -54,4 +54,5 @@ $route['404_override'] = 'errorAccess/not_found';
 $route['error/access/404'] = 'errorAccess/not_found';
 $route['translate_uri_dashes'] = FALSE;
 $route['journals'] = 'quinua/estacion/listar';
+$route['accesos']['GET'] = 'accesos/ViewAccesos/index';
 $route['accesos/sistema/listar']['GET'] = 'accesos/sistema/listar';
