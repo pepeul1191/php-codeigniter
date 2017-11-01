@@ -56,4 +56,6 @@ $route['translate_uri_dashes'] = FALSE;
 $route['journals'] = 'quinua/estacion/listar';
 $route['accesos']['GET'] = 'accesos/ViewAccesos/index';
 $route['accesos/sistema/listar']['GET'] = 'accesos/sistema/listar';
+$route['accesos/modulo/listar/(:num)']['GET'] = 'accesos/modulo/listar/$1';
+$route['accesos/modulo/guardar']['GET'] = 'accesos/modulo/guardar';
 $route['accesos/usuario/listar']['GET'] = 'accesos/usuario/listar';

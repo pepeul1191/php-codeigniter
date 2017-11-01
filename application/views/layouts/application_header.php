@@ -11,10 +11,11 @@
         var MODULOS_JSON = JSON.parse('<?php echo $menu; ?>');
         var ITEMS_JSON = JSON.parse('<?php echo $items; ?>');
         var DATA = JSON.parse('<?php echo $data; ?>');
-        var CSRF = null;    
+        var CSRF = '<?php echo $this->security->get_csrf_hash();?>';
     </script>
 </head>
 <body>
+	
     <!-- Inicio Modal -->
     <button type="button" class="btn btn-primary btn-lg oculto" data-toggle="modal" data-target="#modal-container"  id="btnModal" >Launch demo modal</button>
     <div class="modal fade" id="modal-container" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
