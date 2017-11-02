@@ -2,6 +2,9 @@
 
 require_once 'application/models/accesos/Usuario_model.php';
 require_once 'application/models/accesos/Acceso_model.php';
+require_once 'application/models/accesos/UsuarioPermiso_model.php';
+require_once 'application/models/accesos/UsuarioRol_model.php';
+require_once 'application/models/accesos/UsuarioSistema_model.php';
 
 class Usuario extends CI_Controller 
 {
@@ -128,6 +131,42 @@ class Usuario extends CI_Controller
             ) P
             ON T.id = P.id', 
 			array('sistema_id' => $sistema_id, 'usuario_id' => $usuario_id))->find_array());
+	}
+
+	public function guardar_sistemas()
+	{
+		$this->load->library('HttpAccess', array('allow' => ['POST'], 'received' => $this->input->method(TRUE)));
+		ORM::get_db('accesos')->beginTransaction();
+		$data = json_decode($this->input->post('data'));
+		$nuevos = $data->{'nuevos'};
+		$editados = $data->{'editados'};
+		$eliminados = $data->{'eliminados'};
+		$usuario_id = $data->{"extra"}->{'usuario_id'};
+		$rpta = []; $array_nuevos = [];
+		try {
+			if(count($nuevos) > 0){
+				foreach ($nuevos as &$nuevo) {
+				    $usuario_sistema = Model::factory('UsuarioSistema_model', 'accesos')->create();
+					$usuario_sistema->sistema_id = $nuevo->{'id'};
+					$usuario_sistema->usuario_id = $usuario_id;
+					$usuario_sistema->save();
+				}
+			}
+			if(count($eliminados) > 0){
+				foreach ($eliminados as &$sistema_id) {
+			    	$usuario_sistema = Model::factory('UsuarioSistema_model', 'accesos')->where('sistema_id', $sistema_id)->where('usuario_id', $usuario_id)->find_one();
+			    	$usuario_sistema->delete();
+				}
+			}
+			$rpta['tipo_mensaje'] = 'success';
+        	$rpta['mensaje'] = ['Se ha registrado la asociación/deasociación de los sistemas al usuario', $array_nuevos];
+        	ORM::get_db('accesos')->commit();
+		} catch (Exception $e) {
+		    $rpta['tipo_mensaje'] = 'error';
+        	$rpta['mensaje'] = ['Se ha producido un error en asociar/deasociar los sistemas al usuario', $e->getMessage()];
+        	ORM::get_db('accesos')->rollBack();
+		}
+		echo json_encode($rpta);
 	}
 }
 

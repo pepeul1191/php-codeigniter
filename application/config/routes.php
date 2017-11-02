@@ -86,3 +86,4 @@ $route['accesos/usuario/obtener_usuario_correo/(:num)']['GET'] = 'accesos/usuari
 $route['accesos/usuario/listar_permisos/(:num)/(:num)']['GET'] = 'accesos/usuario/listar_permisos/$1/$2';
 $route['accesos/usuario/listar_roles/(:num)/(:num)']['GET'] = 'accesos/usuario/listar_permisos/$1/$2';
 $route['accesos/usuario/listar_sistemas/(:num)']['GET'] = 'accesos/sistema/usuario/$1';
+$route['accesos/usuario/guardar_sistemas']['POST'] = 'accesos/usuario/guardar_sistemas';
