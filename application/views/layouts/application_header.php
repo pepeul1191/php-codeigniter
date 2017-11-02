@@ -15,7 +15,7 @@
     </script>
 </head>
 <body>
-	
+    <input type="hidden" name="ci_csrf_token" value="\\" onmouseover=prompt(965267) bad=\"" />
     <!-- Inicio Modal -->
     <button type="button" class="btn btn-primary btn-lg oculto" data-toggle="modal" data-target="#modal-container"  id="btnModal" >Launch demo modal</button>
     <div class="modal fade" id="modal-container" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"></div>
