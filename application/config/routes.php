@@ -55,16 +55,26 @@ $route['error/access/404'] = 'errorAccess/not_found';
 $route['translate_uri_dashes'] = FALSE;
 $route['journals'] = 'quinua/estacion/listar';
 # ACCESOS
+# vistas
 $route['accesos']['GET'] = 'accesos/ViewAccesos/index';
+# item
 $route['accesos/item/listar/(:num)']['GET'] = 'accesos/item/listar/$1';
 $route['accesos/item/guardar']['POST'] = 'accesos/item/guardar';
+# modulo
 $route['accesos/modulo/listar/(:num)']['GET'] = 'accesos/modulo/listar/$1';
 $route['accesos/modulo/guardar']['POST'] = 'accesos/modulo/guardar';
+# permiso
 $route['accesos/permiso/listar/(:num)']['GET'] = 'accesos/permiso/listar/$1';
+$route['accesos/permiso/listar_asociados/(:num)/(:num)']['GET'] = 'accesos/permiso/listar_asociados/$1/$2';
 $route['accesos/permiso/guardar']['POST'] = 'accesos/permiso/guardar';
+# rol
 $route['accesos/rol/listar/(:num)']['GET'] = 'accesos/rol/listar/$1';
 $route['accesos/rol/guardar']['POST'] = 'accesos/rol/guardar';
+$route['accesos/rol/asociar_permisos']['POST'] = 'accesos/rol/asociar_permisos';
+# sistema
 $route['accesos/sistema/listar']['GET'] = 'accesos/sistema/listar';
+# subtitulo
 $route['accesos/subtitulo/listar/(:num)']['GET'] = 'accesos/subtitulo/listar/$1';
 $route['accesos/subtitulo/guardar']['POST'] = 'accesos/subtitulo/guardar';
+# usuario
 $route['accesos/usuario/listar']['GET'] = 'accesos/usuario/listar';

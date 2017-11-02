@@ -58,6 +58,24 @@ class Permiso extends CI_Controller
 		}
 		echo json_encode($rpta);
 	}
+
+	public function listar_asociados($sistema_id, $rol_id)
+	{
+		$this->load->library('HttpAccess', array('allow' => ['GET'], 'received' => $this->input->method(TRUE)));
+		echo json_encode(ORM::for_table('', 'accesos')->raw_query('
+			SELECT T.id AS id, T.nombre AS nombre, (CASE WHEN (P.existe = 1) THEN 1 ELSE 0 END) AS existe, T.llave AS llave FROM 
+            (
+            SELECT id, nombre, llave, 0 AS existe FROM permisos WHERE sistema_id = :sistema_id
+            ) T
+            LEFT JOIN
+            (
+            SELECT P.id, P.nombre,  P.llave, 1 AS existe  FROM permisos P 
+            INNER JOIN roles_permisos RP ON P.id = RP.permiso_id
+            WHERE RP.rol_id = :rol_id
+            ) P
+            ON T.id = P.id', 
+			array('sistema_id' => $sistema_id, 'rol_id' => $rol_id))->find_array());
+	}
 }
 
 ?>
