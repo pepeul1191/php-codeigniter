@@ -4,8 +4,7 @@ class HttpAccess {
     function __construct($params)
     {
 		if (!in_array($params['received'], $params['allow'])){
-			include 'application/config/config.php';
-			header( 'Location: ' . $config['base_url'] . 'error/access/404' );
+			header( 'Location: ' . BASE_URL . 'error/access/404' );
 		}
     }
 }

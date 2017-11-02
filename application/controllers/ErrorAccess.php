@@ -8,6 +8,11 @@ class ErrorAccess extends CI_Controller
 		$this->output->set_status_header('404'); 
 		$this->load->view('error/404');
 	}
+
+	public function not_found_redirect()
+	{
+		header( 'Location: ' . BASE_URL . 'error/access/404' );
+	}
 }
 
 ?>
