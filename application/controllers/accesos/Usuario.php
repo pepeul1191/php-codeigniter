@@ -72,6 +72,63 @@ class Usuario extends CI_Controller
 		}
 		echo $rpta;
 	}
+
+	public function guardar_usuario_correo()
+	{
+		$this->load->library('HttpAccess', array('allow' => ['POST'], 'received' => $this->input->method(TRUE)));
+		$data = json_decode($this->input->post('usuario'));
+		ORM::get_db('accesos')->beginTransaction();
+		try {
+			$usuario = Model::factory('Usuario_model', 'accesos')->find_one($data->{'id'});
+			$usuario->usuario = $data->{'usuario'};
+			$usuario->correo = $data->{'correo'};
+			$usuario->save();
+			$rpta['tipo_mensaje'] = 'success';
+        	$rpta['mensaje'] = ['Se ha registrado los cambios en los datos generales del usuari', []];
+        	ORM::get_db('accesos')->commit();
+		} catch (Exception $e) {
+		    $rpta['tipo_mensaje'] = 'error';
+        	$rpta['mensaje'] = ['Se ha producido un error en guardar los datos generales del usuario', $e->getMessage()];
+        	ORM::get_db('accesos')->rollBack();
+		}
+		echo json_encode($rpta);
+	}
+
+	public function listar_permisos($sistema_id, $usuario_id)
+	{
+		$this->load->library('HttpAccess', array('allow' => ['GET'], 'received' => $this->input->method(TRUE)));
+		echo json_encode(ORM::for_table('', 'accesos')->raw_query('
+            SELECT T.id AS id, T.nombre AS nombre, (CASE WHEN (P.existe = 1) THEN 1 ELSE 0 END) AS existe, T.llave AS llave FROM
+            (
+                SELECT id, nombre, llave, 0 AS existe FROM permisos WHERE sistema_id = :sistema_id
+            ) T
+            LEFT JOIN
+            (
+                SELECT P.id, P.nombre,  P.llave, 1 AS existe  FROM permisos P 
+                INNER JOIN usuarios_permisos UP ON P.id = UP.permiso_id
+                WHERE UP.usuario_id = :usuario_id
+            ) P
+            ON T.id = P.id', 
+			array('sistema_id' => $sistema_id, 'usuario_id' => $usuario_id))->find_array());
+	}
+
+	public function listar_roles($sistema_id, $usuario_id)
+	{
+		$this->load->library('HttpAccess', array('allow' => ['GET'], 'received' => $this->input->method(TRUE)));
+		echo json_encode(ORM::for_table('', 'accesos')->raw_query('
+            SELECT T.id AS id, T.nombre AS nombre, (CASE WHEN (P.existe = 1) THEN 1 ELSE 0 END) AS existe FROM
+            (
+                SELECT id, nombre, 0 AS existe FROM roles WHERE sistema_id = :sistema_id
+            ) T
+            LEFT JOIN
+            (
+                SELECT R.id, R.nombre, 1 AS existe  FROM roles R 
+                INNER JOIN usuarios_roles UR ON R.id = UR.rol_id
+                WHERE UR.usuario_id = :usuario_id
+            ) P
+            ON T.id = P.id', 
+			array('sistema_id' => $sistema_id, 'usuario_id' => $usuario_id))->find_array());
+	}
 }
 
 ?>
