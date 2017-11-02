@@ -23,7 +23,7 @@ class Item extends CI_Controller
 		try {
 			if(count($nuevos) > 0){
 				foreach ($nuevos as &$nuevo) {
-				    $item = Model::factory('Item_model')->create();
+				    $item = Model::factory('Item_model', 'accesos')->create();
 					$item->nombre = $nuevo->{'nombre'};
 					$item->url = $nuevo->{'url'};
 					$item->subtitulo_id = $subtitulo_id;
@@ -36,7 +36,7 @@ class Item extends CI_Controller
 			}
 			if(count($editados) > 0){
 				foreach ($editados as &$editado) {
-					$item = Model::factory('Item_model')->find_one($editado->{'id'});
+					$item = Model::factory('Item_model', 'accesos')->find_one($editado->{'id'});
 					$item->nombre = $editado->{'nombre'};
 					$item->url = $editado->{'url'};
 					$item->save();
@@ -44,7 +44,7 @@ class Item extends CI_Controller
 			}	
 			if(count($eliminados) > 0){
 				foreach ($eliminados as &$eliminado) {
-			    	$item = Model::factory('Item_model')->find_one($eliminado);
+			    	$item = Model::factory('Item_model', 'accesos')->find_one($eliminado);
 			    	$item->delete();
 				}
 			}

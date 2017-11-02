@@ -23,7 +23,7 @@ class Subtitulo extends CI_Controller
 		try {
 			if(count($nuevos) > 0){
 				foreach ($nuevos as &$nuevo) {
-				    $subtitulo = Model::factory('Subtitulo_model')->create();
+				    $subtitulo = Model::factory('Subtitulo_model', 'accesos')->create();
 					$subtitulo->nombre = $nuevo->{'nombre'};
 					$subtitulo->modulo_id = $id_modulo;
 					$subtitulo->save();
@@ -35,14 +35,14 @@ class Subtitulo extends CI_Controller
 			}
 			if(count($editados) > 0){
 				foreach ($editados as &$editado) {
-					$subtitulo = Model::factory('Subtitulo_model')->find_one($editado->{'id'});
+					$subtitulo = Model::factory('Subtitulo_model', 'accesos')->find_one($editado->{'id'});
 					$subtitulo->nombre = $editado->{'nombre'};
 					$subtitulo->save();
 				}
 			}	
 			if(count($eliminados) > 0){
 				foreach ($eliminados as &$eliminado) {
-			    	$subtitulo = Model::factory('Subtitulo_model')->find_one($eliminado);
+			    	$subtitulo = Model::factory('Subtitulo_model', 'accesos')->find_one($eliminado);
 			    	$subtitulo->delete();
 				}
 			}
