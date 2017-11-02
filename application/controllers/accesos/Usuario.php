@@ -168,6 +168,78 @@ class Usuario extends CI_Controller
 		}
 		echo json_encode($rpta);
 	}
+
+	public function asociar_roles()
+	{
+		$this->load->library('HttpAccess', array('allow' => ['POST'], 'received' => $this->input->method(TRUE)));
+		ORM::get_db('accesos')->beginTransaction();
+		$data = json_decode($this->input->post('data'));
+		$nuevos = $data->{'nuevos'};
+		$editados = $data->{'editados'};
+		$eliminados = $data->{'eliminados'};
+		$usuario_id = $data->{"extra"}->{'usuario_id'};
+		$rpta = []; $array_nuevos = [];
+		try {
+			if(count($nuevos) > 0){
+				foreach ($nuevos as &$nuevo) {
+				    $usuario_rol = Model::factory('UsuarioRol_model', 'accesos')->create();
+					$usuario_rol->rol_id = $nuevo->{'id'};
+					$usuario_rol->usuario_id = $usuario_id;
+					$usuario_rol->save();
+				}
+			}
+			if(count($eliminados) > 0){
+				foreach ($eliminados as &$rol_id) {
+			    	$usuario_rol = Model::factory('UsuarioRol_model', 'accesos')->where('rol_id', $rol_id)->where('usuario_id', $usuario_id)->find_one();
+			    	$usuario_rol->delete();
+				}
+			}
+			$rpta['tipo_mensaje'] = 'success';
+        	$rpta['mensaje'] = ['Se ha registrado la asociación/deasociación de los roles al usuario', $array_nuevos];
+        	ORM::get_db('accesos')->commit();
+		} catch (Exception $e) {
+		    $rpta['tipo_mensaje'] = 'error';
+        	$rpta['mensaje'] = ['Se ha producido un error en asociar/deasociar los roles al usuario', $e->getMessage()];
+        	ORM::get_db('accesos')->rollBack();
+		}
+		echo json_encode($rpta);
+	}
+
+	public function asociar_permisos()
+	{
+		$this->load->library('HttpAccess', array('allow' => ['POST'], 'received' => $this->input->method(TRUE)));
+		ORM::get_db('accesos')->beginTransaction();
+		$data = json_decode($this->input->post('data'));
+		$nuevos = $data->{'nuevos'};
+		$editados = $data->{'editados'};
+		$eliminados = $data->{'eliminados'};
+		$usuario_id = $data->{"extra"}->{'usuario_id'};
+		$rpta = []; $array_nuevos = [];
+		try {
+			if(count($nuevos) > 0){
+				foreach ($nuevos as &$nuevo) {
+				    $usuario_permiso = Model::factory('UsuarioPermiso_model', 'accesos')->create();
+					$usuario_permiso->permiso_id = $nuevo->{'id'};
+					$usuario_permiso->usuario_id = $usuario_id;
+					$usuario_permiso->save();
+				}
+			}
+			if(count($eliminados) > 0){
+				foreach ($eliminados as &$permiso_id) {
+			    	$usuario_permiso = Model::factory('UsuarioPermiso_model', 'accesos')->where('permiso_id', $permiso_id)->where('usuario_id', $usuario_id)->find_one();
+			    	$usuario_permiso->delete();
+				}
+			}
+			$rpta['tipo_mensaje'] = 'success';
+        	$rpta['mensaje'] = ['Se ha registrado la asociación/deasociación de los permisos al usuario', $array_nuevos];
+        	ORM::get_db('accesos')->commit();
+		} catch (Exception $e) {
+		    $rpta['tipo_mensaje'] = 'error';
+        	$rpta['mensaje'] = ['Se ha producido un error en asociar/deasociar los permisos al usuario', $e->getMessage()];
+        	ORM::get_db('accesos')->rollBack();
+		}
+		echo json_encode($rpta);
+	}
 }
 
 ?>
