@@ -54,8 +54,13 @@ $route['404_override'] = 'errorAccess/not_found';
 $route['error/access/404'] = 'errorAccess/not_found';
 $route['translate_uri_dashes'] = FALSE;
 $route['journals'] = 'quinua/estacion/listar';
+# ACCESOS
 $route['accesos']['GET'] = 'accesos/ViewAccesos/index';
-$route['accesos/sistema/listar']['GET'] = 'accesos/sistema/listar';
+$route['accesos/item/listar/(:num)']['GET'] = 'accesos/item/listar/$1';
+$route['accesos/item/guardar']['POST'] = 'accesos/item/guardar';
 $route['accesos/modulo/listar/(:num)']['GET'] = 'accesos/modulo/listar/$1';
-$route['accesos/modulo/guardar']['GET'] = 'accesos/modulo/guardar';
+$route['accesos/modulo/guardar']['POST'] = 'accesos/modulo/guardar';
+$route['accesos/sistema/listar']['GET'] = 'accesos/sistema/listar';
+$route['accesos/subtitulo/listar/(:num)']['GET'] = 'accesos/subtitulo/listar/$1';
+$route['accesos/subtitulo/guardar']['POST'] = 'accesos/subtitulo/guardar';
 $route['accesos/usuario/listar']['GET'] = 'accesos/usuario/listar';

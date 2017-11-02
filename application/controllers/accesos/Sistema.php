@@ -1,5 +1,7 @@
 <?php
 
+require_once 'application/models/accesos/Sistema_model.php';
+
 class Sistema extends CI_Controller 
 {
 	public function listar()

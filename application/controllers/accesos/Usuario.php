@@ -1,6 +1,6 @@
 <?php
 
-require_once 'application/config/database.php';
+require_once 'application/models/accesos/Usuario_model.php';
 
 class Usuario extends CI_Controller 
 {
