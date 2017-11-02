@@ -26,6 +26,29 @@ class Usuario extends CI_Controller
 		$this->load->library('HttpAccess', array('allow' => ['GET'], 'received' => $this->input->method(TRUE)));
 		echo json_encode(Model::factory('Usuario_model', 'accesos')->select('usuario')->select('correo')->where('id', $usuario_id)->find_array()[0]);
 	}
+	
+	public function nombre_repetido()
+	{
+		$this->load->library('HttpAccess', array('allow' => ['POST'], 'received' => $this->input->method(TRUE)));
+		$data = json_decode($this->input->post('data'));
+		$usuario_id = $data->{'id'};
+		$usuario = $data->{'usuario'};
+		$rpta = 0;
+		if ($usuario_id == 'E'){
+			#SELECT COUNT(*) AS cantidad FROM usuarios WHERE usuario = ?
+			$rpta = Model::factory('Usuario_model', 'accesos')->where('usuario', $usuario)->count();
+		}else{
+			#SELECT COUNT(*) AS cantidad FROM usuarios WHERE usuario = ? AND id = ?
+			$rpta = Model::factory('Usuario_model', 'accesos')->where('usuario', $usuario)->where('id', $usuario_id)->count();
+			if($rpta == 1){
+				$rpta = 0;
+			}else{
+				#SELECT COUNT(*) AS cantidad FROM usuarios WHERE usuario = ?
+				$rpta = Model::factory('Usuario_model', 'accesos')->where('usuario', $usuario)->count();
+			}
+		}
+		echo $rpta;
+	}
 }
 
 ?>
