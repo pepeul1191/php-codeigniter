@@ -49,6 +49,29 @@ class Usuario extends CI_Controller
 		}
 		echo $rpta;
 	}
+
+	public function correo_repetido()
+	{
+		$this->load->library('HttpAccess', array('allow' => ['POST'], 'received' => $this->input->method(TRUE)));
+		$data = json_decode($this->input->post('data'));
+		$usuario_id = $data->{'id'};
+		$correo = $data->{'correo'};
+		$rpta = 0;
+		if ($usuario_id == 'E'){
+			#SELECT COUNT(*) AS cantidad FROM usuarios WHERE correo = ?
+			$rpta = Model::factory('Usuario_model', 'accesos')->where('correo', $correo)->count();
+		}else{
+			#SELECT COUNT(*) AS cantidad FROM usuarios WHERE correo = ? AND id = ?
+			$rpta = Model::factory('Usuario_model', 'accesos')->where('correo', $correo)->where('id', $usuario_id)->count();
+			if($rpta == 1){
+				$rpta = 0;
+			}else{
+				#SELECT COUNT(*) AS cantidad FROM usuarios WHERE correo = ?
+				$rpta = Model::factory('Usuario_model', 'accesos')->where('correo', $correo)->count();
+			}
+		}
+		echo $rpta;
+	}
 }
 
 ?>

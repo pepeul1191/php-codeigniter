@@ -79,5 +79,6 @@ $route['accesos/subtitulo/guardar']['POST'] = 'accesos/subtitulo/guardar';
 # usuario
 $route['accesos/usuario/listar']['GET'] = 'accesos/usuario/listar';
 $route['accesos/usuario/logs/(:num)']['GET'] = 'accesos/usuario/logs/$1';
+$route['accesos/usuario/correo_repetido']['POST'] = 'accesos/usuario/correo_repetido';
 $route['accesos/usuario/nombre_repetido']['POST'] = 'accesos/usuario/nombre_repetido';
 $route['accesos/usuario/obtener_usuario_correo/(:num)']['GET'] = 'accesos/usuario/obtener_usuario_correo/$1';
