@@ -20,6 +20,12 @@ class Usuario extends CI_Controller
 		$this->load->library('HttpAccess', array('allow' => ['GET'], 'received' => $this->input->method(TRUE)));
 		echo json_encode(Model::factory('Acceso_model', 'accesos')->select('id')->select('momento')->where('usuario_id', $usuario_id)->find_array());
 	}
+
+	public function obtener_usuario_correo($usuario_id)
+	{
+		$this->load->library('HttpAccess', array('allow' => ['GET'], 'received' => $this->input->method(TRUE)));
+		echo json_encode(Model::factory('Usuario_model', 'accesos')->select('usuario')->select('correo')->where('id', $usuario_id)->find_array()[0]);
+	}
 }
 
 ?>
