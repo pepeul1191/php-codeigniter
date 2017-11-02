@@ -73,6 +73,7 @@ $route['accesos/rol/guardar']['POST'] = 'accesos/rol/guardar';
 $route['accesos/rol/asociar_permisos']['POST'] = 'accesos/rol/asociar_permisos';
 # sistema
 $route['accesos/sistema/listar']['GET'] = 'accesos/sistema/listar';
+$route['accesos/sistema/guardar']['POST'] = 'accesos/sistema/guardar';
 # subtitulo
 $route['accesos/subtitulo/listar/(:num)']['GET'] = 'accesos/subtitulo/listar/$1';
 $route['accesos/subtitulo/guardar']['POST'] = 'accesos/subtitulo/guardar';
@@ -84,7 +85,7 @@ $route['accesos/usuario/nombre_repetido']['POST'] = 'accesos/usuario/nombre_repe
 $route['accesos/usuario/guardar_usuario_correo']['POST'] = 'accesos/usuario/guardar_usuario_correo';
 $route['accesos/usuario/obtener_usuario_correo/(:num)']['GET'] = 'accesos/usuario/obtener_usuario_correo/$1';
 $route['accesos/usuario/listar_permisos/(:num)/(:num)']['GET'] = 'accesos/usuario/listar_permisos/$1/$2';
-$route['accesos/usuario/listar_roles/(:num)/(:num)']['GET'] = 'accesos/usuario/listar_permisos/$1/$2';
+$route['accesos/usuario/listar_roles/(:num)/(:num)']['GET'] = 'accesos/usuario/listar_roles/$1/$2';
 $route['accesos/usuario/listar_sistemas/(:num)']['GET'] = 'accesos/sistema/usuario/$1';
 $route['accesos/usuario/guardar_sistemas']['POST'] = 'accesos/usuario/guardar_sistemas';
 $route['accesos/usuario/asociar_roles']['POST'] = 'accesos/usuario/asociar_roles';
