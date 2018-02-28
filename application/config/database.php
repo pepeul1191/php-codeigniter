@@ -1,9 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require_once 'vendor/j4mie/idiorm/idiorm.php';
-require_once 'vendor/j4mie/paris/paris.php';
-
+#require_once 'vendor/j4mie/idiorm/idiorm.php';
+#require_once 'vendor/j4mie/paris/paris.php';
 ORM::configure('sqlite:' . APPPATH . DIRECTORY_SEPARATOR .'db' . DIRECTORY_SEPARATOR. 'db_accesos.db',  null, 'accesos');
 ORM::configure('sqlite:' . APPPATH . DIRECTORY_SEPARATOR .'db' . DIRECTORY_SEPARATOR. 'db_quinua.db',  null, 'quinua');
 ORM::configure('sqlite:' . APPPATH . DIRECTORY_SEPARATOR .'db' . DIRECTORY_SEPARATOR. 'db_libros.db',  null, 'libros');

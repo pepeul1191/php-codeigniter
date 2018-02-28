@@ -13,7 +13,8 @@
 	"require": {
 		"php": ">=5.3.7",
 		"j4mie/idiorm": "^1.5.3",
-       "j4mie/paris":"^1.5.6"
+     "j4mie/paris":"^1.5.6",
+     "nategood/httpful": "*"
 	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
